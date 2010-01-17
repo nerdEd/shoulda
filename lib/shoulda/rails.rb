@@ -7,8 +7,6 @@ require 'shoulda/action_controller' if defined? ActionController::Base
 require 'shoulda/action_view'       if defined? ActionView::Base
 require 'shoulda/action_mailer'     if defined? ActionMailer::Base
 
-root = Rails.root || RAILS_ROOT
-if defined?(root)
-  # load in the 3rd party macros from vendorized plugins and gems
+if (root = (defined?(Rails.root) && Rails.root) || RAILS_ROOT)
   Shoulda.autoload_macros root, File.join("vendor", "{plugins,gems}", "*")
 end
